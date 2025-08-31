@@ -17,4 +17,14 @@ public final class Validation {
         Objects.requireNonNull(email, "email");
         if (!email.contains("@")) throw new IllegalArgumentException("invalid email");
     }
+
+    /** Central, consistent rule for displayName. */
+    public static String validateDisplayName(String displayName) {
+        if (displayName == null) return null;
+        String normalized = displayName.trim();
+        if (normalized.length() > 100) {
+            throw new IllegalArgumentException("displayName must be at most 100 characters");
+        }
+        return normalized;
+    }
 }

@@ -1,28 +1,28 @@
 package com.example.profiles;
 
-import java.util.Objects;
-
-/**
- * Assembles profiles with scattered, inconsistent validation.
+/*
+ * Assembles profiles with consistent validation via Builder.
  */
+
 public class ProfileService {
 
-    // returns a fully built profile but mutates it afterwards (bug-friendly)
+    // Creates minimal immutable profile
     public UserProfile createMinimal(String id, String email) {
-        if (id == null || id.isBlank()) throw new IllegalArgumentException("bad id");
-        if (email == null || !email.contains("@")) throw new IllegalArgumentException("bad email");
-
-        UserProfile p = new UserProfile(id, email);
-        // later code keeps mutating...
-        return p;
+        return new UserProfile.Builder()
+                .id(id)
+                .email(email)
+                .build();
     }
 
-    public void updateDisplayName(UserProfile p, String displayName) {
-        Objects.requireNonNull(p, "profile");
-        if (displayName != null && displayName.length() > 100) {
-            // silently trim (inconsistent policy)
-            displayName = displayName.substring(0, 100);
-        }
-        p.setDisplayName(displayName); // mutability leak
+    // Creates a profile with displayName (instead of updating later)
+    public UserProfile createWithDisplayName(String id, String email, String displayName) {
+        displayName = Validation.validateDisplayName(displayName);
+        return new UserProfile.Builder()
+                .id(id)
+                .email(email)
+                .displayName(displayName)
+                .build();
     }
+
+    // Note: no mutating updateDisplayName() — immutability preserved.
 }
