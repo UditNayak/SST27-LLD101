@@ -17,3 +17,9 @@ public class OrderLine {
 
     public void setQuantity(int q) { this.quantity = q; }
 }
+
+/*
+ * sku: Stock Keeping Unit - unique identifier for each product
+ * quantity: Number of items ordered
+ * unitPriceCents: Price per item in cents
+ */
