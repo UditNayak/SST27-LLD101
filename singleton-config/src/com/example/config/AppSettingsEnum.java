@@ -8,7 +8,6 @@ import java.util.Properties;
 
 /**
  * Enum-based Singleton for App Settings
- * -------------------------------------
  * - Easiest and safest Singleton pattern in Java
  * - Handles serialization and reflection automatically
  * - Instance is created once (when enum is loaded)
@@ -18,7 +17,6 @@ public enum AppSettingsEnum {
 
     private final Properties properties = new Properties();
 
-    // Load configuration from file (one-time, can be extended to allow reload if needed)
     public void loadFromFile(Path path) {
         try (InputStream input = Files.newInputStream(path)) {
             properties.load(input);
