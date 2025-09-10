@@ -1,7 +1,7 @@
 package beverages_decorator;
 
-public class WhippedCream extends AddonDecorator {
-    public WhippedCream(Beverage beverage) {
+public class Cream extends AddonDecorator {
+    public Cream(Beverage beverage) {
         super(beverage);
     }
 

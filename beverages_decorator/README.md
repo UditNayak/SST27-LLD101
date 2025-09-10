@@ -12,9 +12,9 @@ beverages_decorator/
 │       ├── Latte.java             # Concrete base beverage
 │       ├── AddonDecorator.java    # Abstract decorator
 │       ├── Milk.java              # Concrete addon
-│       ├── Mocha.java             # Concrete addon
+│       ├── Chocolate.java         # Concrete addon
 │       ├── Sugar.java             # Concrete addon
-│       ├── WhippedCream.java      # Concrete addon
+│       ├── Cream.java             # Concrete addon
 │       └── Client.java            # Client demo
 └── README.md
 ```
@@ -22,7 +22,35 @@ beverages_decorator/
 ## Output
 ```
 Plain Cappuccino cost: 10
-Cappuccino + Milk + Mocha cost: 22
-Latte + Sugar + WhippedCream cost: 28
+Cappuccino + Milk + Chocolate cost: 22
+Latte + Sugar + Cream cost: 28
 Cappuccino + 2x Sugar + Milk cost: 19
+```
+
+## Builder
+
+Sometimes, chaining multiple decorators with `new` becomes hard to read:
+
+```java
+Beverage coffee = new Chocolate(new Milk(new Cappuccino()));
+Beverage sweetLatte = new Cream(new Sugar(new Latte()));
+```
+
+### Usage
+```java
+// Example: Cappuccino with Milk and Chocolate
+Beverage customCoffee = new BeverageBuilder(new Cappuccino())
+        .addMilk()
+        .addChocolate()
+        .build();
+
+System.out.println("Custom coffee cost: " + customCoffee.cost());
+
+// Example: Latte with Sugar and Cream
+Beverage customLatte = new BeverageBuilder(new Latte())
+        .addSugar()
+        .addCream()
+        .build();
+
+System.out.println("Custom latte cost: " + customLatte.cost());
 ```
