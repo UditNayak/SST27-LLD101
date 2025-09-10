@@ -12,7 +12,7 @@ public class Demo {
         smsAndEmail.notify("Build green ✅");
 
         // b) Email + WhatsApp
-        Notifier waAndEmail = new WhatsAppDecorator(base, "user_wa");
+        Notifier waAndEmail = new WhatsAppDecorator(base, "+91-99999-11111");
         waAndEmail.notify("Staging deployed 🟢");
 
         // c) Email + Slack
